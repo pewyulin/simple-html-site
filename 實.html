@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>稅金計算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .calculator input, .calculator button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .calculator button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>稅金計算器</h2>
+        <label for="netAmount">實收金額:</label>
+        <input type="number" id="netAmount" placeholder="請輸入實收金額">
+        <label for="taxRate">稅率 (%):</label>
+        <input type="number" id="taxRate" placeholder="請輸入稅率">
+        <button onclick="calculateGrossAmount()">計算應付金額</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function calculateGrossAmount() {
+            const netAmount = parseFloat(document.getElementById('netAmount').value);
+            const taxRate = parseFloat(document.getElementById('taxRate').value);
+
+            if (isNaN(netAmount) || isNaN(taxRate)) {
+                alert("請輸入有效的數值！");
+                return;
+            }
+
+            const taxRateDecimal = taxRate / 100;
+            const grossAmount = netAmount / (1 - taxRateDecimal);
+
+            document.getElementById('result').innerText = `應付的總金額是: ${grossAmount.toFixed(2)} 元`;
+        }
+    </script>
+</body>
+</html>
